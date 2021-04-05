@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "swung_aws"
+version = "0.1.0"
+description = "Package to deal with AWS stuff for SWUNG"
+authors = ["Filippo B <filippo82@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+boto3 = "^1.17.17"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
