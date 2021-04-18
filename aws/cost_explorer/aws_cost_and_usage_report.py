@@ -19,6 +19,12 @@ session = boto3.session.Session(profile_name='thebook')
 #cd = session.client('ce', 'eu-central-1')
 cd = session.client('ce')
 
+
+TimePeriod = {
+    'Start': start,
+    'End':  end
+}
+
 results = []
 
 token = None
@@ -27,7 +33,7 @@ while True:
         kwargs = {'NextPageToken': token}
     else:
         kwargs = {}
-    data = cd.get_cost_and_usage(TimePeriod={'Start': start, 'End':  end}, Granularity='DAILY', Metrics=['UnblendedCost'], GroupBy=[{'Type': 'DIMENSION', 'Key': 'LINKED_ACCOUNT'}, {'Type': 'DIMENSION', 'Key': 'SERVICE'}], **kwargs)
+    data = cd.get_cost_and_usage(TimePeriod=TimePeriod, Granularity='DAILY', Metrics=['UnblendedCost'], GroupBy=[{'Type': 'DIMENSION', 'Key': 'LINKED_ACCOUNT'}, {'Type': 'DIMENSION', 'Key': 'SERVICE'}], **kwargs)
     results += data['ResultsByTime']
     token = data.get('NextPageToken')
     if not token:
